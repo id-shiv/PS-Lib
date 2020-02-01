@@ -1,6 +1,6 @@
 function Get-Inputs {
-    Add-Type -AssemblyName System.Windows.Forms
-    Add-Type -AssemblyName System.Drawing
+    Add-MemberType -AssemblyName System.Windows.Forms
+    Add-MemberType -AssemblyName System.Drawing
 
     $form = New-Object System.Windows.Forms.Form
     $form.Text = 'Data Entry Form'
@@ -46,6 +46,35 @@ function Get-Inputs {
     }
 }
 
+function Get-Environment {
+    $Environment = New-Object PSObject
+
+    $HostName = ([System.Net.Dns]::GetHostByName(($env:computerName))).Hostname
+    $Environment | Add-Member -MemberType NoteProperty -Name HostName -Value $HostName
+
+    $OS = $PSVersionTable.Platform + " " + $PSVersionTable.OS
+    $Environment | Add-Member -MemberType NoteProperty -Name OS -Value $OS
+
+    $Environment | Add-Member -MemberType NoteProperty -Name PSVersion -Value $PSVersionTable.PSVersion
+
+    $Environment | Add-Member -MemberType NoteProperty -Name CurrentUser -Value (whoami)
+
+    $Environment | Add-Member -MemberType NoteProperty -Name CurrentDirectory -Value (Get-Location).Path
+
+    $Environment | Add-Member -MemberType NoteProperty -Name CurrentDate -Value (Get-Date)
+
+    $TimeZone = ((Get-TimeZone).Id + " (" + (Get-TimeZone).DisplayName + ")")
+    $Environment | Add-Member -MemberType NoteProperty -Name CurrentTimeZone -Value $TimeZone
+
+    $UpTime = [string](Get-Uptime).Days + " Days, " + [string](Get-Uptime).Hours + " Hours, " + 
+    [string](Get-Uptime).Minutes + " Minutes, " + [string](Get-Uptime).Seconds + " Seconds"
+    $Environment | Add-Member -MemberType NoteProperty -Name UpTime -Value $UpTime
+
+    $Environment | Add-Member -MemberType NoteProperty -Name PSExecutionPolicy -Value (Get-ExecutionPolicy)
+
+    return $Environment
+}
+
 function Test-PingFQDN {
     Param 
     (
@@ -53,25 +82,11 @@ function Test-PingFQDN {
          [string] $FQDN
     )
     if (Test-Connection -TargetName $FQDN  -Count 1 -Quiet -ErrorAction SilentlyContinue 6> $null) {
-        Write-Host "Ping" $FQDN "- SUCCESS"
+        return "SUCCESS"
     }
     else {
-        Write-Host "Ping" $FQDN "- FAILED"
+        return"FAILED"
     }
-}
-
-function Get-Environment {
-    $HostName = ([System.Net.Dns]::GetHostByName(($env:computerName))).Hostname
-    $OS = $PSVersionTable.Platform + " " + $PSVersionTable.OS
-
-    Write-Host "`n========================"
-    Write-Host "Environment"
-    Write-Host "========================"
-    Write-Host "HostName -" $HostName
-    Write-Host "PowerShell -" $PSVersionTable.PSVersion
-    Write-Host "OS -" $OS
-
-    return $HostName, $PSVersionTable.PSVersion, $OS
 }
 
 function Remote-Command {
@@ -97,14 +112,22 @@ function Remote-Command {
     }
 }
 
+function Search-Process {
+    Param 
+    (
+        [Parameter(Mandatory=$true)]
+        [string] $ProcessName
+    )
+    return Get-Process | select-string -Pattern $ProcessName
+}
+
 $ApplianceFQDN = 'localhost'
 $ApplianceUser = 'root'
 $AppliancePasswd = 'iPass1987'
 
-$LocalFQDN, $_, $_ = Get-Environment
+# Get local environment details
+$Environment = Get-Environment
+$Environment | Format-List
 
-Write-Host "`n========================"
-
-Test-PingFQDN -FQDN $LocalFQDN
-
-Write-Host "========================`n"
+# Test-PingFQDN -FQDN $Environment.HostName
+# Search-Process -ProcessName "finder"
