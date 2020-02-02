@@ -74,6 +74,15 @@ function Get-Environment {
 
     $Environment | Add-Member -MemberType NoteProperty -Name HomeDirectory -Value (Get-Variable HOME -valueOnly)
 
+    $UsedSpace = 0
+    $FreeSpace = 0
+    foreach($Drive in Get-PSDrive){
+        $UsedSpace = $UsedSpace + ((Get-PSDrive $Drive).Used)/(1024*1024*1024)
+        $FreeSpace = $FreeSpace + ((Get-PSDrive $Drive).Free)/(1024*1024*1024)
+    }
+    $Environment | Add-Member -MemberType NoteProperty -Name UsedSpace -Value ([math]::Round($UsedSpace,2))
+    $Environment | Add-Member -MemberType NoteProperty -Name FreeSpace -Value ([math]::Round($FreeSpace,2))
+
     return $Environment
 }
 
