@@ -46,6 +46,33 @@ function Get-Inputs {
     }
 }
 
+<# 
+.Synopsis 
+   A quick function to determine if a computer is VM or physical box. 
+.DESCRIPTION 
+   This function is designed to quickly determine if a local or remote 
+   computer is a physical machine or a virtual machine. 
+.NOTES 
+   Created by: Jason Wasser 
+   Modified: 9/11/2015 04:12:51 PM   
+ 
+   Changelog:  
+    * added credential support 
+ 
+   To Do: 
+    * Find the Model information for other hypervisor VM's like Xen and KVM. 
+.EXAMPLE 
+   Get-MachineType 
+   Query if the local machine is a physical or virtual machine. 
+.EXAMPLE 
+   Get-MachineType -ComputerName SERVER01  
+   Query if SERVER01 is a physical or virtual machine. 
+.EXAMPLE 
+   Get-MachineType -ComputerName (Get-Content c:\temp\computerlist.txt) 
+   Query if a list of computers are physical or virtual machines. 
+.LINK 
+   https://gallery.technet.microsoft.com/scriptcenter/Get-MachineType-VM-or-ff43f3a9 
+#> 
 function Get-Environment {
     $Environment = New-Object PSObject
 
