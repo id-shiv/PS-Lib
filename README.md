@@ -4,23 +4,25 @@
 
 `Get-Environment`
 
-HostName          : shivs-macbook-air.local
+### Output
 
-OS                : Unix Darwin 18.7.0 Darwin Kernel Version 18.7.0: Tue Aug 20 16:57:14 PDT 2019; root:xnu-4903.271.2~2/RELEASE_X86_64
+`HostName          : shivs-macbook-air.local`
 
-PSVersion         : 6.2.4
+`OS                : Unix Darwin 18.7.0 Darwin Kernel Version 18.7.0: Tue Aug 20 16:57:14 PDT 2019; root:xnu-4903.271.2~2/RELEASE_X86_64`
 
-CurrentUser       : shiv
+`PSVersion         : 6.2.4`
 
-CurrentDirectory  : /Users/shiv/Documents/gitRepositories/PS-Utils
+`CurrentUser       : shiv`
 
-CurrentDate       : 02/01/2020 14:39:54
+`CurrentDirectory  : /Users/shiv/Documents/gitRepositories/PS-Utils`
 
-CurrentTimeZone   : Asia/Calcutta (GMT+05:30)
+`CurrentDate       : 02/01/2020 14:39:54`
 
-UpTime            : 0 Days, 11 Hours, 1 Minutes, 34 Seconds
+`CurrentTimeZone   : Asia/Calcutta (GMT+05:30)`
 
-PSExecutionPolicy : Unrestricted
+`UpTime            : 0 Days, 11 Hours, 1 Minutes, 34 Seconds`
+
+`PSExecutionPolicy : Unrestricted`
 
 ## Ping Test
 
