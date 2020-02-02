@@ -72,6 +72,8 @@ function Get-Environment {
 
     $Environment | Add-Member -MemberType NoteProperty -Name PSExecutionPolicy -Value (Get-ExecutionPolicy)
 
+    $Environment | Add-Member -MemberType NoteProperty -Name HomeDirectory -Value (Get-Variable HOME -valueOnly)
+
     return $Environment
 }
 
