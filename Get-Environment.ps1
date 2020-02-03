@@ -71,7 +71,7 @@ function Get-Environment {
 
    # Retrieve system uptime
    $UpTime = [string](Get-Uptime).Days + " Days, " + [string](Get-Uptime).Hours + " Hours, " + 
-   [string](Get-Uptime).Minutes + " Minutes, " + [string](Get-Uptime).Seconds + " Seconds"
+             [string](Get-Uptime).Minutes + " Minutes, " + [string](Get-Uptime).Seconds + " Seconds"
    $Environment | Add-Member -MemberType NoteProperty -Name UpTime -Value $UpTime
 
    # Retrieve PowerShell execution policy configuration
