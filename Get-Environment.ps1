@@ -88,7 +88,7 @@ function Get-Environment {
       $FreeSpace = $FreeSpace + ((Get-PSDrive $Drive).Free)/(1024*1024*1024)
    }
    $Environment | Add-Member -MemberType NoteProperty -Name UsedSpace -Value ([string]([math]::Round($UsedSpace,2)) + " GB")
-   $Environment | Add-Member -MemberType NoteProperty -Name FreeSpace -Value ([string] ([math]::Round($FreeSpace,2)) + " GB")
+   $Environment | Add-Member -MemberType NoteProperty -Name FreeSpace -Value ([string]([math]::Round($FreeSpace,2)) + " GB")
 
    return ($Environment | Format-List)
 }
