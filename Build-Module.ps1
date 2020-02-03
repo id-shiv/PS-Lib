@@ -39,4 +39,3 @@ $manifest = @{
 }
 New-ModuleManifest @manifest
 Write-Host "`nManifest file created @ "$ModulePath'/'$ModuleName'.psd1'
-
