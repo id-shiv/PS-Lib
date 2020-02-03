@@ -1,5 +1,11 @@
-# System
+# Set of PowerShell modules \ helper functions
 
-## Get-SystemInfo
+## Build-Module
+
+Builds a module with psm1 file as an input  
+
+## System
+
+### Get-SystemInfo
 
 Retrieve System Details

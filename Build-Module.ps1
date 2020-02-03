@@ -11,13 +11,12 @@
 #   * Build-Module.ps1 to be placed and run from folder above <Module Name>
 
 $Path = '/Users/shiv/Documents/gitRepositories/PS-Utils'  # Root path above <Module Name> folder
-$ModuleName = 'System'
 $Author = 'Shiva Prasad'
+$ModuleName = 'System'
 $Description = 'PowerShell Modules for Systems Management'
-$FeaturesToExport = "Get-SystemInfo", "Test-Module"
 
+# Get the path of Module folder
 $ModulePath = $Path + '/' + $ModuleName
-
 
 if ((pwd) -notin ($env:PSModulePath -split ':')) {
     $env:PSModulePath = $env:PSModulePath + ':' + (pwd)
