@@ -2,14 +2,12 @@ Write-Host "`n* Get-SystemInfo"
 function Get-SystemInfo {
     [CmdletBinding()]
     
-    param($ComputerName)
-
     <#
     .SYNOPSIS 
-        Gets system details
+        Retrieves system details
 
     .DESCRIPTION 
-        Gets system details regardless of Operating System.
+        Retrieves system details regardless of Operating System.
 
     .INPUTS
         None. 
