@@ -1,22 +1,19 @@
-<# 
-   .SYNOPSIS 
-   Gets environment parameter values of local machine. 
+<#
+.SYNOPSIS 
+Gets environment parameter values of local system. 
 
-   .DESCRIPTION 
-   Gets environment details regardless of Operating System of the local machine.
+.DESCRIPTION 
+Gets environment details regardless of Operating System of the local system.
 
-   .NOTES 
-   Author : Shiva Prasad (id.shiv.prasad@gmail.com)
-   Version    : 1.0
+.INPUTS
+None. 
+You cannot pipe objects to Get-Environment.
 
-   .INPUTS
-   None. 
-   You cannot pipe objects to Get-Environment.
+.OUTPUTS
+Returns System.Array
+Get-Environment returns a list with environment details of local system.
 
-   .OUTPUTS
-   Returns System.Array
-   Get-Environment returns a list with environment details of local machine.
-
+Sample Output:
    HostName          : shivs-macbook-air.local
    OS                : Unix Darwin 18.7.0 Darwin Kernel Version 18.7.0: Tue Aug 20 16:57:14 PDT 2019; root:xnu-4903.271.2~2/RELEASE_X86_64
    PSVersion         : 6.2.4
@@ -30,13 +27,21 @@
    UsedSpace         : 37.19 GB
    FreeSpace         : 75.61 GB
 
-   .EXAMPLE 
-   Get-Environment 
+.NOTES 
+Author : Shiva Prasad (id.shiv.prasad@gmail.com)
+Version    : 1.0
 
-   .LINK 
-   https://github.com/id-shiv/PS-Lib/blob/master/Get-Environment.ps1
+.EXAMPLE 
+Get-Environment 
+
+.LINK 
+https://github.com/id-shiv/PS-Lib/blob/master/Get-Environment.ps1
 #> 
+
+
 function Get-Environment {
+   [CmdletBinding()]
+   
    # Object to hold environment details
    $Environment = New-Object PSObject
 
