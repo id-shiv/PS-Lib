@@ -28,7 +28,7 @@ Sample Output:
    FreeSpace         : 75.61 GB
 
 .NOTES 
-Author : Shiva Prasad (id.shiv.prasad@gmail.com)
+Author     : Shiva Prasad (id.shiv.prasad@gmail.com)
 Version    : 1.0
 
 .EXAMPLE 
