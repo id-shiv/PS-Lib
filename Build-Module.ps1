@@ -1,25 +1,41 @@
-########################################################
-#
-#  Replace '/' with '\' for Windows Systems
-#  Relplace ':' with ';' for Windows Systems
-#
-########################################################
-
-# Pre-requisites :
+# Pre-requisites
 #   * Folder with <Module Name> created.
 #   * Module file with <Module Name>.psm1 created with functions
 #   * Build-Module.ps1 to be placed and run from folder above <Module Name>
 
-$Path = '/Users/shiv/Documents/gitRepositories/PS-Utils'  # Root path above <Module Name> folder
-$Author = 'Shiva Prasad'
-$ModuleName = 'System'
-$Description = 'PowerShell Modules for Systems Management'
+param(
+    [Parameter(Mandatory=$True, Position=0, ValueFromPipeline=$false)]
+    [System.String]
+    $OS,
 
-# Get the path of Module folder
-$ModulePath = $Path + '/' + $ModuleName
+    [Parameter(Mandatory=$True, Position=1, ValueFromPipeline=$false)]
+    [System.String]
+    $ModuleName,
 
-if ((pwd) -notin ($env:PSModulePath -split ':')) {
-    $env:PSModulePath = $env:PSModulePath + ':' + (pwd)
+    [Parameter(Mandatory=$True, Position=2, ValueFromPipeline=$false)]
+    [System.String]
+    $Author,
+
+    [Parameter(Mandatory=$True, Position=3, ValueFromPipeline=$false)]
+    [System.String]
+    $Description,
+
+    [Parameter(Mandatory=$True, Position=4, ValueFromPipeline=$false)]
+    [System.String]
+    $ModulePath
+)
+
+if ($OS -eq "Windows") {
+    $PathDelimeter = '\'
+    $EnvironmentVariableDelimeter = ';'
+}
+else {
+    $PathDelimeter = '/'
+    $EnvironmentVariableDelimeter = ':'
+}
+
+if (($ModulePath) -notin ($env:PSModulePath -split $EnvironmentVariableDelimeter)) {
+    $env:PSModulePath = $env:PSModulePath + $EnvironmentVariableDelimeter + ($ModulePath)
 }
 Write-Host "`nPowerShell Modules Path : " $env:PSModulePath
 
@@ -27,15 +43,17 @@ Write-Host "`nRetrieving Available Modules ..."
 Get-Module -ListAvailable
 
 Write-Host "`nImporting PowerShell Modules ..."
-Import-Module ./$ModuleName -Force
+Import-Module $ModuleName
 Write-Host "`nImporting PowerShell Modules complete."
 
 Write-Host "`nCreating Module Manifest file ..."
 $manifest = @{
-    Path              = $ModulePath + '/' + $ModuleName + '.psd1'
-    RootModule        = $ModulePath + '/' + $ModuleName + '.psm1'
+    Path              = $ModulePath + $PathDelimeter + $ModuleName + '.psd1'
+    RootModule        = $ModulePath + $PathDelimeter + $ModuleName + '.psm1'
     Author            = $Author
     Description       = $Description
 }
+
 New-ModuleManifest @manifest
-Write-Host "`nManifest file created @ "$ModulePath'/'$ModuleName'.psd1'
+$ManifestPath = $ModulePath + $PathDelimeter + $ModuleName + ".psd1"
+Write-Host "`nManifest file created @ " $ManifestPath

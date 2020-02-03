@@ -18,7 +18,7 @@ ModuleVersion = '0.0.1'
 # CompatiblePSEditions = @()
 
 # ID used to uniquely identify this module
-GUID = '84a50edd-9b19-4344-82ac-206eb47fcf3f'
+GUID = '19d08127-f85c-4b79-bdf2-3e67bbe8bac1'
 
 # Author of this module
 Author = 'Shiva Prasad'
@@ -30,7 +30,7 @@ CompanyName = 'Unknown'
 Copyright = '(c) Shiva Prasad. All rights reserved.'
 
 # Description of the functionality provided by this module
-Description = 'PowerShell Modules for Systems Management'
+Description = 'Retrieves System Information'
 
 # Minimum version of the PowerShell engine required by this module
 # PowerShellVersion = ''

@@ -2,16 +2,15 @@
 
 ## Build-Module
 
-Builds a module with psm1 file as an input  
-
-* Replace '/' with '\' for Windows Systems  
-* Relplace ':' with ';' for Windows Systems
-
 ### Pre-requisites
 
 * Folder with `<Module Name>` created.  
 * Module file with `<Module Name>`.psm1 created with functions.  
 * Build-Module.ps1 to be placed and run from folder above `<Module Name>`.  
+
+### Command
+
+`./Build-Module.ps1 -OS 'NonWindows' -ModuleName 'System' -Author 'Shiva Prasad' -Description 'Retrieves System Information' -ModulePath "/Users/shiv/Documents/gitRepositories/PS-Utils/System"`
 
 ## System
 
