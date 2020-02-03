@@ -1,17 +1,30 @@
 <#
 .SYNOPSIS 
-Gets environment parameter values of local system. 
+Gets environment details of system. 
 
 .DESCRIPTION 
-Gets environment details regardless of Operating System of the local system.
+Gets environment details regardless of Operating System of the system.
 
 .INPUTS
 None. 
 You cannot pipe objects to Get-Environment.
 
 .OUTPUTS
-Returns System.Array
-Get-Environment returns a list with environment details of local system.
+Returns System.Object
+Get-Environment returns a list with environment details of system.
+
+IsPublic IsSerial Name                                     BaseType
+-------- -------- ----                                     --------
+True     False    PSCustomObject                           System.Object
+
+.NOTES 
+Author     : Shiva Prasad (id.shiv.prasad@gmail.com)
+Version    : 1.0
+
+.EXAMPLE 
+Get-Environment 
+
+Retrieves all environment details
 
 Sample Output:
    HostName          : shivs-macbook-air.local
@@ -27,12 +40,13 @@ Sample Output:
    UsedSpace         : 37.19 GB
    FreeSpace         : 75.61 GB
 
-.NOTES 
-Author     : Shiva Prasad (id.shiv.prasad@gmail.com)
-Version    : 1.0
-
 .EXAMPLE 
-Get-Environment 
+(Get-Environment).HostName
+
+Retrieves HostName of the system
+
+Sample Output:
+   shivs-macbook-air.local
 
 .LINK 
 https://github.com/id-shiv/PS-Lib/blob/master/Get-Environment.ps1
@@ -90,5 +104,5 @@ function Get-Environment {
    $Environment | Add-Member -MemberType NoteProperty -Name UsedSpace -Value ([string]([math]::Round($UsedSpace,2)) + " GB")
    $Environment | Add-Member -MemberType NoteProperty -Name FreeSpace -Value ([string]([math]::Round($FreeSpace,2)) + " GB")
 
-   return ($Environment | Format-List)
+   return $Environment
 }
